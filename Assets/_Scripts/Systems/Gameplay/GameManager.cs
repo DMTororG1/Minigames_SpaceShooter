@@ -1,8 +1,10 @@
 using Cysharp.Threading.Tasks;
+using Game;
 using TMPro;
 using UnityEngine;
 using UnityEngine.LowLevel;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -71,6 +73,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ControlsManager controlsManager;
     [SerializeField] private PostProcessingController postProcessingController;
     [SerializeField] private AudioManager audioManager;
+
+    [Header("Networking")]
     [SerializeField] private LeaderboardView leaderboardView;
 
     private void OnDrawGizmosSelected()
@@ -273,8 +277,6 @@ public class GameManager : MonoBehaviour
             isPlaying = false;
             hasStarted = false;
             UiManager.Instance.SetUi(UiType.End, true, 1, () => UiManager.Instance.SetUi(UiType.Gameplay, false));
-
-            leaderboardView.StartUploadScore();
 
             endScore.SetText(postcore + score);
             AudioManager.Instance.PlaySound(AudioManager.AudioType.End, 2.5f);
